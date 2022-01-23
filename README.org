@@ -1,0 +1,20 @@
+#+title: crafter-chat
+
+🚧 Under Construction 🚧
+
+* Bootstrapping the Server
+
+Generate the base system image that can be used for installation:
+
+#+begin_src sh
+
+  guix system image --save-provenance server.scm
+
+#+end_src
+
+* References
+
+- [[https://git.savannah.gnu.org/cgit/guix/maintenance.git/tree/hydra/berlin.scm][Guix team's berlin server]]: =rsync-module= is interesting
+- [[https://stumbles.id.au/getting-started-with-guix-deploy.html][Getting Started with guix deploy]]
+- [[https://guix.gnu.org/cookbook/en/html_node/Running-Guix-on-a-Linode-Server.html][Running Guix on a Linode Server]]
+- [[https://wiki.pantherx.org/Installation-digital-ocean/][Installing Guix on DigitalOcean]]

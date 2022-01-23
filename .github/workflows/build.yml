@@ -1,0 +1,36 @@
+name: Build Server Image
+
+on:
+  push:
+    branches:
+      - master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Install Guix
+        uses: PromyLOPh/guix-install-action@v1
+
+      - name: Build Image
+        run: |
+          image=$(guix system image --save-provenance server.scm)
+          cp $image server.img
+          export RELEASE_TAG=$(date +"%Y%m%d%H%M")
+          echo "RELEASE_TAG=$RELEASE_TAG" >> $GITHUB_ENV
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: crafter-chat - ${{ env.RELEASE_TAG }}
+          tag_name: v${{ env.RELEASE_TAG }}
+          files: server.img
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: SystemCrafters/crafter-chat
