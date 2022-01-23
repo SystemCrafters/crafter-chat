@@ -17,6 +17,19 @@ jobs:
 
       - name: Install Guix
         uses: PromyLOPh/guix-install-action@v1
+        with:
+          channels: |-
+            (list (channel
+                    (name 'guix)
+                    (url "https://git.savannah.gnu.org/git/guix.git")
+                    (branch "master")
+                    (commit
+                      "8860e9db560c5d9e74277b608071fbb93579db4f")
+                    (introduction
+                      (make-channel-introduction
+                        "9edb3f66fd807b096b48283debdcddccfea34bad"
+                        (openpgp-fingerprint
+                          "BBB0 2DDF 2CEA F6A8 0D1D  E643 A2A0 6DF2 A33A 54FA")))))
 
       - name: Build Image
         run: |
